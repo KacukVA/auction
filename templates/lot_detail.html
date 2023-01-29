@@ -1,0 +1,16 @@
+{% extends 'template.html' %}
+{% load static %}
+{% block js %}
+    <script src="{% static 'js/lot.js' %}"></script>
+{% endblock js %}
+{% block title %}
+    {{ lot }}
+{% endblock %}
+{% block content %}
+<h1>{{ lot.title }}</h1>
+<hr>
+<p><b>Current price:</b> {{ lot.price }}</p>
+    <a href="/">Home</a>
+    &nbsp;&nbsp;
+{#    <a href="{% url 'lot_update' lot.id %}">Update</a>#}
+{% endblock %}
