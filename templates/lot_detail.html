@@ -7,10 +7,20 @@
     {{ lot }}
 {% endblock %}
 {% block content %}
-<h1>{{ lot.title }}</h1>
-<hr>
-<p><b>Current price:</b> {{ lot.price }}</p>
-    <a href="/">Home</a>
-    &nbsp;&nbsp;
-{#    <a href="{% url 'lot_update' lot.id %}">Update</a>#}
+    <h1>{{ lot.title }}</h1>
+    <hr>
+    <p><b>Current price: </b><span class="current-price">{{ lot.price }}</span></p>
+    <input type="number">
+    <button class="btn update btn-success">Up</button>
+    <br>
+    {% if user.is_authenticated %}
+        {% if user == lot.created_by %}
+            <form method="post">
+                {% csrf_token %}
+                <div>
+                    <button class="btn btn-outline-success my-2 my-sm-0 finish">Finish</button>
+                </div>
+            </form>
+        {% endif %}
+    {% endif %}
 {% endblock %}

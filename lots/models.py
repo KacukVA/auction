@@ -11,7 +11,7 @@ class Lot(models.Model):
     )
     title = models.CharField(max_length=255)
     price = models.PositiveIntegerField(default=1)
-    created_by = User()
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=8,
         choices=STATUS_CHOICES,
