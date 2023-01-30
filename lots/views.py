@@ -40,6 +40,6 @@ class LotDetailView(LoginRequiredMixin, DetailView):
     template_name = 'lot_detail.html'
 
     def post(self, request, *args, **kwargs):
-        self.object = Lot.objects.filter(id=kwargs['pk']).update(status=Lot.FINISHED)
+        self.object = Lot.objects.filter(id=kwargs['pk'], created_by=request.user).update(status=Lot.FINISHED)
         context = super(LotDetailView, self).get_context_data(**kwargs)
         return self.render_to_response(context=context)
