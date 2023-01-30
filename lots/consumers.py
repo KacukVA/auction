@@ -13,7 +13,7 @@ class LotConsumer(WebsocketConsumer):
         async_to_sync(self.channel_layer.group_discard)(self.group_name, self.channel_name)
 
     def receive(self, text_data=None, bytes_data=None):
-        Lot.objects.filter(id=int(self.group_name), price__lt=int(text_data))\
+        Lot.objects.filter(id=int(self.group_name), price__lt=int(text_data), status=Lot.PLACED)\
             .update(price=int(text_data))
         async_to_sync(self.channel_layer.group_send)(self.group_name, {
             'type': 'change_price',
